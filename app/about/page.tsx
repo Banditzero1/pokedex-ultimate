@@ -37,26 +37,26 @@ export default function About() {
             </Avatar>
           </Box>
 
-          <Typography variant="h4" align="center" fontWeight="bold" gutterBottom sx={{ color: '#111827' }}>
+          <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: 'bold', color: '#111827' }}>
             ข้อมูลผู้พัฒนา (Developer Profile)
           </Typography>
 
           <Stack spacing={2} sx={{ mt: 4 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #f3f4f6', pb: 1.5 }}>
-              <Typography variant="body1" fontWeight="600" color="text.secondary">ชื่อ-นามสกุล:</Typography>
-              <Typography variant="body1" fontWeight="700" color="text.primary">[สิงหราช แสงหิรัญ]</Typography>
+              <Typography variant="body1" color="text.secondary" sx={{ fontWeight: '600' }}>ชื่อ-นามสกุล:</Typography>
+              <Typography variant="body1" color="text.primary" sx={{ fontWeight: '700' }}>[สิงหราช แสงหิรัญ]</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #f3f4f6', pb: 1.5 }}>
-              <Typography variant="body1" fontWeight="600" color="text.secondary">รหัสนักศึกษา:</Typography>
-              <Typography variant="body1" fontWeight="700" color="text.primary">[673450202-3]</Typography>
+              <Typography variant="body1" color="text.secondary" sx={{ fontWeight: '600' }}>รหัสนักศึกษา:</Typography>
+              <Typography variant="body1" color="text.primary" sx={{ fontWeight: '700' }}>[673450202-3]</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #f3f4f6', pb: 1.5 }}>
-              <Typography variant="body1" fontWeight="600" color="text.secondary">สาขาวิชา:</Typography>
-              <Typography variant="body1" fontWeight="700" color="text.primary">[วิทยาการคอมพิวเตอร์]</Typography>
+              <Typography variant="body1" color="text.secondary" sx={{ fontWeight: '600' }}>สาขาวิชา:</Typography>
+              <Typography variant="body1" color="text.primary" sx={{ fontWeight: '700' }}>[cis]</Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', pb: 1.5 }}>
-              <Typography variant="body1" fontWeight="600" color="text.secondary">มหาวิทยาลัย:</Typography>
-              <Typography variant="body1" fontWeight="700" color="text.primary">[สหวิยาการ]</Typography>
+              <Typography variant="body1" color="text.secondary" sx={{ fontWeight: '600' }}>มหาวิทยาลัย:</Typography>
+              <Typography variant="body1" color="text.primary" sx={{ fontWeight: '700' }}>[วิทยาเขตหนองคาย]</Typography>
             </Box>
           </Stack>
         </CardContent>
