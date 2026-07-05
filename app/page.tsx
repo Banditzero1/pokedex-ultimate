@@ -2,17 +2,17 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
-import { Grid, Card, CardContent, Typography, CardMedia, Pagination, Skeleton, Box, Stack, Chip } from '@mui/material';
+import { Card, CardContent, Typography, CardMedia, Pagination, Skeleton, Box, Stack, Chip } from '@mui/material';
 
 // ฟังก์ชันสำหรับกำหนดสีพื้นหลังของการ์ดโปเกม่อนตามประเภทหลัก
 const getTypeCardColor = (type: string) => {
     switch (type) {
-        case 'fire': return '#fee2e2'; // สีแดงอ่อน
-        case 'water': return '#e0f2fe'; // สีฟ้าอ่อน
-        case 'grass': return '#d1fae5'; // สีเขียวอ่อน
-        case 'electric': return '#fef9c3'; // สีเหลืองอ่อน
-        case 'poison': return '#f5e1ff'; // สีม่วงอ่อน
-        default: return '#f3f4f6'; // สีเทาอ่อน (ค่าเริ่มต้น)
+        case 'fire': return '#fee2e2';
+        case 'water': return '#e0f2fe';
+        case 'grass': return '#d1fae5';
+        case 'electric': return '#fef9c3';
+        case 'poison': return '#f5e1ff';
+        default: return '#f3f4f6';
     }
 }
 
@@ -63,31 +63,34 @@ export default function Home() {
         </Box>
       </Box>
 
-      <Grid container spacing={4}>
+      {/* เปลี่ยนจาก Grid เป็น Box CSS Grid เพื่อความเสถียร 100% */}
+      <Box sx={{ 
+          display: 'grid', 
+          gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' }, 
+          gap: 4 
+      }}>
         {loading
           ? Array.from(new Array(20)).map((_, index) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-                <Card sx={{ borderRadius: '16px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)' }}>
-                  <Skeleton variant="rectangular" height={240} animation="wave" />
-                  <CardContent sx={{ p: 3 }}>
-                    <Skeleton variant="text" height={40} width="80%" animation="wave" />
-                    <Skeleton variant="text" height={24} width="40%" animation="wave" sx={{ mt: 1 }} />
-                  </CardContent>
-                </Card>
-              </Grid>
+              <Card key={index} sx={{ borderRadius: '16px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)' }}>
+                <Skeleton variant="rectangular" height={240} animation="wave" />
+                <CardContent sx={{ p: 3 }}>
+                  <Skeleton variant="text" height={40} width="80%" animation="wave" />
+                  <Skeleton variant="text" height={24} width="40%" animation="wave" sx={{ mt: 1 }} />
+                </CardContent>
+              </Card>
             ))
           : pokemonList.map((pokemon) => {
               const primaryType = pokemon.types[0]?.type.name;
               const cardBgColor = getTypeCardColor(primaryType);
 
               return (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={pokemon.id}>
-                <Link href={`/pokemon/${pokemon.name}`} style={{ textDecoration: 'none' }}>
+                <Link key={pokemon.id} href={`/pokemon/${pokemon.name}`} style={{ textDecoration: 'none' }}>
                   <Card sx={{ 
                       borderRadius: '16px', 
                       boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
                       transition: '0.3s ease-in-out',
                       border: `2px solid transparent`,
+                      height: '100%',
                       '&:hover': { 
                           transform: 'translateY(-5px)', 
                           boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
@@ -131,10 +134,9 @@ export default function Home() {
                     </CardContent>
                   </Card>
                 </Link>
-              </Grid>
               );
           })}
-      </Grid>
+      </Box>
     </Box>
   );
 }

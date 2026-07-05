@@ -2,28 +2,27 @@
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
-import { Box, Typography, Button, Grid, Card, CardMedia, Chip, CircularProgress, Stack, LinearProgress } from '@mui/material';
+import { Box, Typography, Button, CardMedia, Chip, CircularProgress, Stack, LinearProgress } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-// ฟังก์ชันกำหนดสีประเภทโปเกม่อนที่ละเอียดขึ้น
+// ฟังก์ชันกำหนดสี
 const getTypeColor = (type: string) => {
     switch (type) {
-        case 'fire': return '#f97316'; // ส้ม
-        case 'water': return '#3b82f6'; // ฟ้า
-        case 'grass': return '#22c55e'; // เขียว
-        case 'electric': return '#eab308'; // เหลือง
-        case 'poison': return '#a855f7'; // ม่วง
-        default: return '#6b7280'; // เทา
+        case 'fire': return '#f97316'; 
+        case 'water': return '#3b82f6'; 
+        case 'grass': return '#22c55e'; 
+        case 'electric': return '#eab308'; 
+        case 'poison': return '#a855f7'; 
+        default: return '#6b7280'; 
     }
 }
 
-// ฟังก์ชันกำหนดสีแถบสถานะ (Stats Bar)
 const getStatColor = (statName: string) => {
     switch (statName) {
-        case 'hp': return '#4ade80'; // เขียว HP
-        case 'attack': return '#f87171'; // แดง Attack
-        case 'defense': return '#60a5fa'; // ฟ้า Defense
-        default: return '#9ca3af'; // เทา
+        case 'hp': return '#4ade80'; 
+        case 'attack': return '#f87171'; 
+        case 'defense': return '#60a5fa'; 
+        default: return '#9ca3af'; 
     }
 }
 
@@ -78,12 +77,8 @@ export default function PokemonDetail() {
         onClick={() => router.back()} 
         startIcon={<ArrowBackIcon />}
         sx={{ 
-            mb: 4, 
-            color: '#374151', 
-            borderColor: '#e5e7eb', 
-            fontWeight: '600',
-            textTransform: 'none',
-            borderRadius: '999px',
+            mb: 4, color: '#374151', borderColor: '#e5e7eb', fontWeight: '600',
+            textTransform: 'none', borderRadius: '999px',
             '&:hover': { borderColor: '#d1d5db', backgroundColor: '#f9fafb' }
         }}
       >
@@ -92,47 +87,28 @@ export default function PokemonDetail() {
 
       {/* Hero Section */}
       <Box sx={{ 
-          backgroundColor: heroBgColor, 
-          borderRadius: '24px', 
-          p: { xs: 4, md: 8 }, 
-          mb: 6, 
-          position: 'relative', 
-          overflow: 'hidden',
+          backgroundColor: heroBgColor, borderRadius: '24px', p: { xs: 4, md: 8 }, 
+          mb: 6, position: 'relative', overflow: 'hidden',
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '300px'
+          display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '300px'
       }}>
           <Typography variant="h1" sx={{ 
-              fontWeight: 'extrabold',
-              position: 'absolute', 
-              color: 'white', 
-              opacity: 0.08, 
-              fontSize: { xs: '6rem', md: '10rem' },
-              textTransform: 'uppercase',
-              userSelect: 'none',
-              zIndex: 0
+              fontWeight: 'extrabold', position: 'absolute', color: 'white', 
+              opacity: 0.08, fontSize: { xs: '6rem', md: '10rem' }, textTransform: 'uppercase',
+              userSelect: 'none', zIndex: 0
           }}>
               {pokemon.name}
           </Typography>
 
           <CardMedia
-            component="img"
-            image={pokemon.sprites.other['official-artwork'].front_default}
-            alt={pokemon.name}
-            sx={{ 
-                width: { xs: '200px', md: '300px' }, 
-                height: 'auto',
-                position: 'relative', 
-                zIndex: 1, 
-                filter: 'drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1))'
-            }}
+            component="img" image={pokemon.sprites.other['official-artwork'].front_default} alt={pokemon.name}
+            sx={{ width: { xs: '200px', md: '300px' }, height: 'auto', position: 'relative', zIndex: 1, filter: 'drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1))' }}
           />
       </Box>
 
-      <Grid container spacing={6}>
-        <Grid item xs={12} md={6}>
+      {/* แทนที่ Grid ด้วย Box Grid */}
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' }, gap: 6 }}>
+        <Box>
           <Typography variant="h2" sx={{ textTransform: 'capitalize', fontWeight: 'bold', color: '#111827' }}>
             {pokemon.name}
           </Typography>
@@ -141,32 +117,20 @@ export default function PokemonDetail() {
             {pokemon.types.map((t: any) => {
               const typeColor = getTypeColor(t.type.name);
               return (
-              <Chip 
-                key={t.type.name} 
-                label={t.type.name} 
-                sx={{ 
-                    textTransform: 'capitalize', 
-                    backgroundColor: typeColor, 
-                    color: 'white', 
-                    fontWeight: '600',
-                    px: 1
-                }} 
-              />
+              <Chip key={t.type.name} label={t.type.name} sx={{ textTransform: 'capitalize', backgroundColor: typeColor, color: 'white', fontWeight: '600', px: 1 }} />
               );
             })}
           </Stack>
           
           <Box sx={{ mt: 4, textAlign: 'center', backgroundColor: 'white', p: 3, borderRadius: '16px', border: '1px solid #e5e7eb' }}>
              <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', color: '#374151' }}>Pokemon Cry</Typography>
-             <audio controls src={pokemon.cries?.latest}>
-                Your browser does not support the audio element.
-             </audio>
+             <audio controls src={pokemon.cries?.latest}>Your browser does not support the audio element.</audio>
           </Box>
-        </Grid>
+        </Box>
 
-        <Grid item xs={12} md={6}>
+        <Box>
           {/* Base Stats */}
-          <Box sx={{ backgroundColor: 'white', p: 4, borderRadius: '16px', border: '1px solid #e5e7eb', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
+          <Box sx={{ backgroundColor: 'white', p: 4, borderRadius: '16px', border: '1px solid #e5e7eb', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}>
             <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', color: '#111827' }}>Base Stats</Typography>
             <Stack spacing={2.5} sx={{ mt: 3 }}>
                 {pokemon.stats.map((s: any) => {
@@ -178,17 +142,7 @@ export default function PokemonDetail() {
                       <span style={{ fontWeight: '500' }}>{s.stat.name}</span>
                       <strong style={{ fontSize: '1.1rem', color: '#111827' }}>{s.base_stat}</strong>
                     </Typography>
-                    <LinearProgress 
-                        variant="determinate" 
-                        value={progressValue} 
-                        sx={{ 
-                            height: '10px', 
-                            borderRadius: '5px', 
-                            mt: 1, 
-                            backgroundColor: '#f3f4f6', 
-                            '.MuiLinearProgress-bar': { backgroundColor: statColor }
-                        }} 
-                    />
+                    <LinearProgress variant="determinate" value={progressValue} sx={{ height: '10px', borderRadius: '5px', mt: 1, backgroundColor: '#f3f4f6', '.MuiLinearProgress-bar': { backgroundColor: statColor } }} />
                   </Box>
                   );
                 })}
@@ -200,24 +154,12 @@ export default function PokemonDetail() {
             <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', color: '#111827' }}>Evolution Line</Typography>
             <Box sx={{ display: 'flex', gap: 2, mt: 2, flexWrap: 'wrap', backgroundColor: 'white', p: 3, borderRadius: '16px', border: '1px solid #e5e7eb' }}>
               {evolution.map((evoName) => (
-                <Chip 
-                  key={evoName} 
-                  label={evoName} 
-                  color={evoName === name ? "primary" : "default"} 
-                  onClick={() => router.push(`/pokemon/${evoName}`)}
-                  sx={{ 
-                    textTransform: 'capitalize', 
-                    cursor: 'pointer', 
-                    fontWeight: '600',
-                    border: evoName === name ? `2px solid #dc2626` : 'none'
-                  }}
-                  variant={evoName === name ? "outlined" : "filled"}
-                />
+                <Chip key={evoName} label={evoName} color={evoName === name ? "primary" : "default"} onClick={() => router.push(`/pokemon/${evoName}`)} sx={{ textTransform: 'capitalize', cursor: 'pointer', fontWeight: '600', border: evoName === name ? `2px solid #dc2626` : 'none' }} variant={evoName === name ? "outlined" : "filled"} />
               ))}
             </Box>
           </Box>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     </Box>
   );
 }
