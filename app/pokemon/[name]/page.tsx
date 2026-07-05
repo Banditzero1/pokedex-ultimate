@@ -65,7 +65,7 @@ export default function PokemonDetail() {
     fetchDetail();
   }, [name]);
 
-  if (loading) return <Box display="flex" justifyContent="center" alignItems="center" height="70vh"><CircularProgress color="primary" /></Box>;
+  if (loading) return <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}><CircularProgress color="primary" /></Box>;
   if (!pokemon) return <Typography align="center" variant="h5" sx={{ color: '#6b7280', mt: 10 }}>Pokemon details not found.</Typography>;
 
   const primaryType = pokemon.types[0]?.type.name;
@@ -104,7 +104,8 @@ export default function PokemonDetail() {
           alignItems: 'center',
           minHeight: '300px'
       }}>
-          <Typography variant="h1" fontWeight="extrabold" sx={{ 
+          <Typography variant="h1" sx={{ 
+              fontWeight: 'extrabold',
               position: 'absolute', 
               color: 'white', 
               opacity: 0.08, 
@@ -132,7 +133,7 @@ export default function PokemonDetail() {
 
       <Grid container spacing={6}>
         <Grid item xs={12} md={6}>
-          <Typography variant="h2" textTransform="capitalize" fontWeight="bold" sx={{ color: '#111827' }}>
+          <Typography variant="h2" sx={{ textTransform: 'capitalize', fontWeight: 'bold', color: '#111827' }}>
             {pokemon.name}
           </Typography>
           
@@ -155,8 +156,8 @@ export default function PokemonDetail() {
             })}
           </Stack>
           
-          <Box mt={4} textAlign="center" sx={{ backgroundColor: 'white', p: 3, borderRadius: '16px', border: '1px solid #e5e7eb' }}>
-             <Typography variant="h6" fontWeight="bold" gutterBottom sx={{ color: '#374151' }}>Pokemon Cry</Typography>
+          <Box sx={{ mt: 4, textAlign: 'center', backgroundColor: 'white', p: 3, borderRadius: '16px', border: '1px solid #e5e7eb' }}>
+             <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', color: '#374151' }}>Pokemon Cry</Typography>
              <audio controls src={pokemon.cries?.latest}>
                 Your browser does not support the audio element.
              </audio>
@@ -166,14 +167,14 @@ export default function PokemonDetail() {
         <Grid item xs={12} md={6}>
           {/* Base Stats */}
           <Box sx={{ backgroundColor: 'white', p: 4, borderRadius: '16px', border: '1px solid #e5e7eb', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
-            <Typography variant="h5" fontWeight="bold" gutterBottom sx={{ color: '#111827' }}>Base Stats</Typography>
+            <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', color: '#111827' }}>Base Stats</Typography>
             <Stack spacing={2.5} sx={{ mt: 3 }}>
                 {pokemon.stats.map((s: any) => {
                   const statColor = getStatColor(s.stat.name);
                   const progressValue = (s.base_stat / 255) * 100;
                   return (
                   <Box key={s.stat.name}>
-                    <Typography variant="body1" textTransform="capitalize" sx={{ color: '#374151', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Typography variant="body1" sx={{ textTransform: 'capitalize', color: '#374151', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <span style={{ fontWeight: '500' }}>{s.stat.name}</span>
                       <strong style={{ fontSize: '1.1rem', color: '#111827' }}>{s.base_stat}</strong>
                     </Typography>
@@ -195,9 +196,9 @@ export default function PokemonDetail() {
           </Box>
 
           {/* Evolution */}
-          <Box mt={6}>
-            <Typography variant="h5" fontWeight="bold" gutterBottom sx={{ color: '#111827' }}>Evolution Line</Typography>
-            <Box display="flex" gap={2} mt={2} flexWrap="wrap" sx={{ backgroundColor: 'white', p: 3, borderRadius: '16px', border: '1px solid #e5e7eb' }}>
+          <Box sx={{ mt: 6 }}>
+            <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', color: '#111827' }}>Evolution Line</Typography>
+            <Box sx={{ display: 'flex', gap: 2, mt: 2, flexWrap: 'wrap', backgroundColor: 'white', p: 3, borderRadius: '16px', border: '1px solid #e5e7eb' }}>
               {evolution.map((evoName) => (
                 <Chip 
                   key={evoName} 

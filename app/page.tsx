@@ -53,11 +53,11 @@ export default function Home() {
 
   return (
     <Box>
-      <Typography variant="h3" fontWeight="bold" align="left" sx={{ color: '#111827', mb: 5 }}>
+      <Typography variant="h3" align="left" sx={{ fontWeight: 'bold', color: '#111827', mb: 5 }}>
         Pokedex Ultimate
       </Typography>
       
-      <Box display="flex" justifyContent="center" mb={6}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 6 }}>
         <Box sx={{ backgroundColor: 'white', p: 1, borderRadius: '999px', border: '1px solid #e5e7eb', boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)' }}>
           <Pagination count={totalPages} page={page} onChange={handlePageChange} color="primary" sx={{ '.MuiPaginationItem-root': { fontWeight: '500' } }} />
         </Box>
@@ -110,7 +110,7 @@ export default function Home() {
                       <Typography variant="body2" sx={{ color: '#6b7280', fontWeight: '500' }}>
                         #{pokemon.id.toString().padStart(3, '0')}
                       </Typography>
-                      <Typography variant="h6" align="left" textTransform="capitalize" color="#111827" fontWeight="bold" sx={{ mt: 0.5 }}>
+                      <Typography variant="h6" align="left" sx={{ textTransform: 'capitalize', color: '#111827', fontWeight: 'bold', mt: 0.5 }}>
                         {pokemon.name}
                       </Typography>
                       <Stack direction="row" spacing={1} sx={{ mt: 1.5 }}>
