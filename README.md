@@ -3,7 +3,7 @@
 เว็บไซต์ระบบฐานข้อมูลโปเกมอนสุดล้ำ (Pokédex) ที่ดึงข้อมูลแบบ Real-time จาก PokeAPI แสดงผลด้วยดีไซน์ที่ทันสมัย รองรับการใช้งานทุกหน้าจอ (Responsive Design) พัฒนาขึ้นเพื่อส่งเป็นโปรเจกต์ในรายวิชา
 
 ## 🌐 ลิงก์เข้าใช้งานเว็บไซต์ (Live Demo)
-👉 **Vercel Deployment:** [ใส่ลิงก์จาก Vercel ที่ได้จากขั้นตอนที่ 4 ที่นี่]
+👉 **Vercel Deployment:** [https://pokedex-ultimate-2nkf.vercel.app]
 
 ---
 
